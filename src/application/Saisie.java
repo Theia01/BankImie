@@ -75,10 +75,10 @@ public class Saisie {
 					String firstname = scan.nextLine();
 					System.out.println("Saisissez un nouvel email");
 					String email = scan.nextLine();
-					System.out.println("Saisissez une nouvelle date de naissance");
+					System.out.println("Saisissez une nouvelle date de naissance JJ/MM/YYYY");
 					String ddn = scan.nextLine();
 					while(ddn.matches("\\d{2}/\\d{2}/\\d{4}") == false) {
-						System.out.println("Saisissez une date de naissance");
+						System.out.println("Saisissez une date de naissance JJ/MM/YYYY");
 						ddn = scan.nextLine();
 					}
 					LocalDate d = LocalDate.parse(ddn, formatter);
@@ -94,23 +94,32 @@ public class Saisie {
 	public static void step() {
 		System.out.println("Choisissez une option: \r\n 1) Créer un contact \r\n 2) Modifier un contact \r\n 3) Supprimer un contact \r\n 4) Lister les contacts \r\n Entrez le numéro correspondant à l'option voulue");
 		Scanner scan = new Scanner(System.in);
-		int choice = scan.nextInt();
-		if(choice==1) {
-			do {
-				saisie();
-			} while (continu.matches("oui") == true );
-		} else if(choice==2) {
-			modifier(rep);
-		} else if (choice ==3) {
-			delete(rep);
-		} else if (choice ==4) {
-			tolist(rep);
+		
+		
+		String choice0 = scan.nextLine();
+		if(choice0.matches("\\d+")) {
+			int choice = Integer.parseInt(choice0);
+			if(choice==1) {
+				do {
+					saisie();
+				} while (continu.matches("oui") == true );
+			} else if(choice==2) {
+				modifier(rep);
+			} else if (choice ==3) {
+				delete(rep);
+			} else if (choice ==4) {
+				tolist(rep);
+			} else {
+				System.out.println("Ce numéro ne correspond à aucune option");
+			}
 		} else {
-			System.out.println("Ce numéro ne correspond à aucune option");
+			System.out.println("Ce n'est pas un nombre");
 		}
+		
 		
 		System.out.println("Souhaitez vous effectuer une autre action ? oui/non");
 		ch = scan.next();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -121,5 +130,4 @@ public class Saisie {
 		} while (ch.matches("oui")==true);
 		System.out.println("Au revoir !");
 	}
-
 }
