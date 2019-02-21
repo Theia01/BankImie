@@ -104,11 +104,17 @@ public class Saisie {
 					System.out.println("Saisissez un nouveau prénom");
 					String firstname = scan.next();
 					System.out.println("Saisissez un nouvel email");
+<<<<<<< HEAD
 					String email = scan.next();
 					System.out.println("Saisissez une nouvelle date de naissance");
 					String ddn = scan.next();
+=======
+					String email = scan.nextLine();
+					System.out.println("Saisissez une nouvelle date de naissance JJ/MM/YYYY");
+					String ddn = scan.nextLine();
+>>>>>>> 4af964e2495274abce5676e0ce7404c34784c94d
 					while(ddn.matches("\\d{2}/\\d{2}/\\d{4}") == false) {
-						System.out.println("Saisissez une date de naissance");
+						System.out.println("Saisissez une date de naissance JJ/MM/YYYY");
 						ddn = scan.nextLine();
 					}
 					LocalDate d = LocalDate.parse(ddn, formatter);
@@ -144,6 +150,7 @@ public class Saisie {
 	public static void step() {
 		System.out.println("Choisissez une option: \r\n 1) Créer un contact \r\n 2) Modifier un contact \r\n 3) Supprimer un contact \r\n 4) Lister les contacts \r\n 5) Quitter le programme \r\n Entrez le numéro correspondant à l'option voulue");
 		Scanner scan = new Scanner(System.in);
+<<<<<<< HEAD
 		int choice = scan.nextInt();
 		if(choice==1) {
 			do {
@@ -157,12 +164,34 @@ public class Saisie {
 			tolist();
 		} else if(choice ==5){
 			System.exit(0);
+=======
+		
+		
+		String choice0 = scan.nextLine();
+		if(choice0.matches("\\d+")) {
+			int choice = Integer.parseInt(choice0);
+			if(choice==1) {
+				do {
+					saisie();
+				} while (continu.matches("oui") == true );
+			} else if(choice==2) {
+				modifier(rep);
+			} else if (choice ==3) {
+				delete(rep);
+			} else if (choice ==4) {
+				tolist(rep);
+			} else {
+				System.out.println("Ce numéro ne correspond à aucune option");
+			}
+>>>>>>> 4af964e2495274abce5676e0ce7404c34784c94d
 		} else {
-			System.out.println("Ce numéro ne correspond à aucune option");
+			System.out.println("Ce n'est pas un nombre");
 		}
+		
 		
 		System.out.println("Souhaitez vous effectuer une autre action ? oui/non");
 		ch = scan.next();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -179,5 +208,4 @@ public class Saisie {
 		} while (ch.matches("oui")==true);
 		System.out.println("Au revoir !");
 	}
-
 }
