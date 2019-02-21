@@ -18,7 +18,7 @@ public Person(String lastname, String firstname, String email, LocalDate birthda
 	this.email = email;
 	this.birthdate = birthday;
 }
-
+�
 public Person(int id,String lastname, String firstname, String email, LocalDate birthday) {
 	super();
 	this.id = id;
@@ -28,6 +28,14 @@ public Person(int id,String lastname, String firstname, String email, LocalDate 
 	this.birthdate = birthday;
 }
 
+public Person(int id,String lastname, String firstname, String email, LocalDate birthday) {
+	super();
+	this.id = id;
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.birthdate = birthday;
+}
 
 public String getFirstname() {
 	return firstname;
