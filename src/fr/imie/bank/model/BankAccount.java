@@ -3,12 +3,12 @@ package fr.imie.bank.model;
 import java.math.BigDecimal;
 
 public class BankAccount {
-	private int number;
+	private String number;
 	private BigDecimal balance;
 	private Person owner;
 	
 	
-	public BankAccount(int number,BigDecimal bal, Person owner) {
+	public BankAccount(String number,BigDecimal bal, Person owner) {
 		super();
 		this.number = number;
 		this.setOwner(owner);

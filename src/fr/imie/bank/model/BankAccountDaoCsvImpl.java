@@ -34,7 +34,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
 					Person p = pers.findById(rs.getInt(2));
-					el= new BankAccount(rs.getInt(2),rs.getBigDecimal(3),p);
+					el= new BankAccount(rs.getString(2),rs.getBigDecimal(3),p);
 					acc.add(el);
 				}
 			} catch (SQLException e) {
@@ -74,7 +74,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
 					Person p = pers.findById(rs.getInt(2));
-					b = new BankAccount(rs.getInt(2),rs.getBigDecimal(3),p);
+					b = new BankAccount(rs.getString(2),rs.getBigDecimal(3),p);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -109,7 +109,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 			    connexion = JdbcTools.getConnection();
 				stmt = connexion.prepareStatement(SQL_INSERT,Statement.RETURN_GENERATED_KEYS);
 				stmt.setInt(1, acc.getOwner().getId());
-				stmt.setInt(2, acc.getNumber());
+				stmt.setString(2, acc.getNumber());
 				stmt.setString(3, acc.getBalance().toString());
 				
 				rs = stmt.executeQuery();
