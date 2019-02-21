@@ -1,5 +1,6 @@
 package fr.imie.bank.model;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Person {
@@ -7,6 +8,7 @@ private String firstname;
 private String lastname;
 private String email;
 private LocalDate birthdate;
+private ArrayList<BankAccount> accounts = new ArrayList<>();
 
 public Person(String lastname, String firstname, String email, LocalDate birthday) {
 	super();
@@ -43,9 +45,21 @@ public void setBirthdate(LocalDate birthday) {
 	this.birthdate = birthday;
 }
 
-public String toString() {
+public ArrayList<BankAccount> getAccounts() {
+	return accounts;
+}
+
+public void setAccounts(ArrayList<BankAccount> accounts) {
+	this.accounts = accounts;
+}
+
+public void addAccount(BankAccount bacc) {
+	this.getAccounts().add(bacc);
+}
+
+	public String toString() {
 	String s = this.getFirstname() + " " + this.getLastname() + " " + this.getEmail() + " " + this.getBirthday();
 	return s;
 }
-
+	
 }
