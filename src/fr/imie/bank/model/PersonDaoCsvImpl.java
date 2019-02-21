@@ -80,7 +80,7 @@ public class PersonDaoCsvImpl implements PersonDao {
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			while (rs.next()){
-				p= new Person(rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
+				p= new Person(id,rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

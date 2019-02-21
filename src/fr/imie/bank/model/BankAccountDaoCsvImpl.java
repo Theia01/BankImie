@@ -17,7 +17,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 	// private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM account WHERE id=?";
 	// private static final String SQL_DELETE="delete from contact where id=?";
-	private static final String SQL_INSERT="INSERT INTO account(number) VALUES (?);";
+	private static final String SQL_INSERT="INSERT INTO account(id_owner,number, balance) VALUES (?,?,?);";
 	//private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
 	
 		@Override
@@ -108,7 +108,9 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 			try {
 			    connexion = JdbcTools.getConnection();
 				stmt = connexion.prepareStatement(SQL_INSERT,Statement.RETURN_GENERATED_KEYS);
-				stmt.setInt(1, acc.getNumber());
+				stmt.setInt(1, acc.getOwner().getId());
+				stmt.setInt(2, acc.getNumber());
+				stmt.setString(3, acc.getBalance().toString());
 				
 				rs = stmt.executeQuery();
 			} catch (SQLException e) {
