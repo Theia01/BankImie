@@ -29,4 +29,10 @@ public class DateUtils {
         java.sql.Date sDate = java.sql.Date.valueOf(date);
         return sDate;
     }
+	
+	public static Date LocaltoDate(LocalDate localDate) {
+		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		return date;
+		
+	}
 }

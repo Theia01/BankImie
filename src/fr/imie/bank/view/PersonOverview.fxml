@@ -15,8 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.imie.bank.view.PersonInterface">
    <children>
       <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -53,7 +52,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <children>
-                        <TextField alignment="CENTER" editable="false" text="FirstName" GridPane.columnIndex="1" />
+                        <TextField alignment="CENTER" editable="false" onAction="#Hello" text="FirstName" GridPane.columnIndex="1" />
                         <TextField alignment="CENTER" editable="false" text="LastName" GridPane.columnIndex="2" />
                         <TextField alignment="CENTER" editable="false" text="Email" GridPane.columnIndex="3" />
                         <TextField alignment="CENTER" editable="false" text="BirthDay" GridPane.columnIndex="4" />
@@ -84,11 +83,11 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <TextField layoutX="290.0" layoutY="283.0" prefHeight="25.0" prefWidth="300.0" promptText="FirstName" />
-            <TextField layoutX="290.0" layoutY="312.0" prefHeight="25.0" prefWidth="300.0" promptText="LastName" />
-            <TextField layoutX="290.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="exemple@email.pro" />
-            <DatePicker layoutX="290.0" layoutY="370.0" prefHeight="25.0" prefWidth="150.0" promptText="00/00/0000" />
-            <Button layoutX="475.0" layoutY="370.0" minWidth="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Add" textOverrun="CLIP" />
+            <TextField fx:id="TextFieldFirstName" layoutX="290.0" layoutY="283.0" onAction="#Hello" prefHeight="25.0" prefWidth="300.0" promptText="FirstName" />
+            <TextField fx:id="TextFieldLastName" layoutX="290.0" layoutY="312.0" prefHeight="25.0" prefWidth="300.0" promptText="LastName" />
+            <TextField fx:id="TextFielEmail" layoutX="290.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="exemple@email.pro" />
+            <DatePicker fx:id="DatePickerBirthDay" layoutX="290.0" layoutY="370.0" prefHeight="25.0" prefWidth="150.0" promptText="00/00/0000" />
+            <Button layoutX="475.0" layoutY="370.0" minWidth="8.0" mnemonicParsing="false" onAction="#VerificationAdd" prefHeight="25.0" prefWidth="100.0" text="Add" textOverrun="CLIP" />
          </children>
       </AnchorPane>
    </children>

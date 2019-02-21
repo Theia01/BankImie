@@ -18,7 +18,7 @@ public Person(String lastname, String firstname, String email, LocalDate birthda
 	this.email = email;
 	this.birthdate = birthday;
 }
-
+à
 public Person(int id,String lastname, String firstname, String email, LocalDate birthday) {
 	super();
 	this.id = id;
@@ -27,7 +27,6 @@ public Person(int id,String lastname, String firstname, String email, LocalDate 
 	this.email = email;
 	this.birthdate = birthday;
 }
-
 
 
 public String getFirstname() {
@@ -55,12 +54,22 @@ public void setBirthdate(LocalDate birthday) {
 	this.birthdate = birthday;
 }
 
-public String toString() {
+public ArrayList<BankAccount> getAccounts() {
+	return accounts;
+}
+
+public void setAccounts(ArrayList<BankAccount> accounts) {
+	this.accounts = accounts;
+}
+
+public void addAccount(BankAccount bacc) {
+	this.getAccounts().add(bacc);
+}
+
+	public String toString() {
 	String s = this.getFirstname() + " " + this.getLastname() + " " + this.getEmail() + " " + this.getBirthday();
 	return s;
 }
-
-
 
 public ArrayList<BankAccount> getAccounts() {
 	return accounts;

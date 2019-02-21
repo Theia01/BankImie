@@ -16,8 +16,10 @@ public class MainConsole {
 	public static void main(String[] args) {
 		BigDecimal s = new BigDecimal(122.30);
 		Person t = null;
+
 		BankAccount b = null;
 		
+
 		try {
 			t = new Person("Jean-Michel","Legros","jml@gmail.com", DateUtils.toDate("11/02/1998") );
 		} catch (ParseException e1) {
@@ -33,6 +35,9 @@ public class MainConsole {
 			e.printStackTrace();
 		}
 		
+
+		BankAccount b = new BankAccount(1514651654, s,t);
+
 		
 		try {
 			b = new BankAccount(1514651654, s, pers.findById(3));
