@@ -34,7 +34,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
 					Person p = pers.findById(rs.getInt(2));
-					el= new BankAccount(rs.getInt(3),p);
+					el= new BankAccount(rs.getInt(2),rs.getBigDecimal(3),p);
 					acc.add(el);
 				}
 			} catch (SQLException e) {
@@ -74,7 +74,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
 					Person p = pers.findById(rs.getInt(2));
-					b = new BankAccount(rs.getInt(2),p);
+					b = new BankAccount(rs.getInt(2),rs.getBigDecimal(3),p);
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
