@@ -1,6 +1,10 @@
 package application;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import application.Repertoire;
@@ -8,10 +12,10 @@ import application.Repertoire;
 import java.time.format.DateTimeFormatter;
 
 public class Saisie {
+	public static PersonDAO persDAO = new PersonDAOJdbcImpl();
 	public static String continu;
-	public static Repertoire rep = new Repertoire();
-
 	public static String ch;
+	public static List<Person> rep;
 	
 	public static void saisie() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
@@ -31,68 +35,114 @@ public class Saisie {
 		LocalDate d = LocalDate.parse(ddn, formatter);
 		System.out.println(d);
 		System.out.println("");
-		Person p = new Person(lname,fname,email,d);
+		try {
+			persDAO.createContact(fname, lname, email, d);
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("Si vous souhaitez ajouter un autre contact, écrivez \"oui\"");
-		rep.addContact(p);
 		continu = scan.next();
 
 	}
 	
-	public static void tolist(Repertoire r) {
+	public static void tolist() {
 		System.out.println("");
-		r.listContact();
+		try {
+			persDAO.selectAll();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	public static void delete(Repertoire r) {
+	public static void delete() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Entrez le nom de la personne à supprimer");
-		String lname = scan.nextLine();
-		for(int i=0; i<r.contacts.size(); i++) {
-			if(r.contacts.get(i).getLastname().matches(lname)) {
-				System.out.println(r.contacts.get(i).toString());
+		String lname = scan.next();
+		try {
+			rep = persDAO.selectbyname(lname);
+		} catch (DALException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for(int i=0; i<rep.size(); i++) {
+				System.out.println(rep.get(i).toString());
 				System.out.println("Souhaitez vous supprimer cette personne ? oui / non");
 				String choice = scan.next();
 				if(choice.matches("oui")==true) {
-					r.deleteContact(i);
+					try {
+						persDAO.delete(rep.get(i).getId());
+					} catch (DALException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-			}
+		
 		}
-	}
-	public static void modifier(Repertoire r) {
+	} 
+	
+	public static void modifier() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Entrez le nom de la personne à modifier");
-		String lname = scan.nextLine();
-		for(int i=0; i<r.contacts.size(); i++) {
-			if(r.contacts.get(i).getLastname().matches(lname)) {
-				System.out.println(r.contacts.get(i).toString());
+		String lname = scan.next();
+		try {
+			rep = persDAO.selectbyname(lname);
+		} catch (DALException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		for(int i=0; i< rep.size() ; i++) {
+				System.out.println(rep.get(i).toString());
 				System.out.println("Souhaitez vous modifier cette personne ? oui / non");
-				String choice = scan.nextLine();
+				String choice = scan.next();
 				if(choice.equalsIgnoreCase("oui")) {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");  
 					System.out.println("Saisissez un nouveau nom");
-					String lastname = scan.nextLine();
+					String lastname = scan.next();
 					System.out.println("Saisissez un nouveau prénom");
-					String firstname = scan.nextLine();
+					String firstname = scan.next();
 					System.out.println("Saisissez un nouvel email");
-					String email = scan.nextLine();
+					String email = scan.next();
 					System.out.println("Saisissez une nouvelle date de naissance");
-					String ddn = scan.nextLine();
+					String ddn = scan.next();
 					while(ddn.matches("\\d{2}/\\d{2}/\\d{4}") == false) {
 						System.out.println("Saisissez une date de naissance");
 						ddn = scan.nextLine();
 					}
 					LocalDate d = LocalDate.parse(ddn, formatter);
-					System.out.println(d);
 					System.out.println("");
 					
-					r.modContact(i, firstname, lastname, email, d);
+					try {
+						persDAO.updateContact(rep.get(i).getId(), firstname, lastname, email, d);
+					} catch (DALException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+		}
+	}
+	
+	public static void write() throws DALException {
+		FileWriter fileWriter;
+		List<Person> plist = persDAO.selectAll();
+		try {
+			fileWriter = new FileWriter("MonFichier.csv",false);
+			fileWriter.append("First Name,Last Name,Email,BirthDate");
+			for(int i=0; i<plist.size();i++) {
+				fileWriter.append("\r\n");
+				fileWriter.append(plist.get(i).getFirstname() + "," + plist.get(i).getLastname() + "," + plist.get(i).getEmail() + "," + plist.get(i).getBirthday());
 			}
+			fileWriter.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
 	public static void step() {
-		System.out.println("Choisissez une option: \r\n 1) Créer un contact \r\n 2) Modifier un contact \r\n 3) Supprimer un contact \r\n 4) Lister les contacts \r\n Entrez le numéro correspondant à l'option voulue");
+		System.out.println("Choisissez une option: \r\n 1) Créer un contact \r\n 2) Modifier un contact \r\n 3) Supprimer un contact \r\n 4) Lister les contacts \r\n 5) Quitter le programme \r\n Entrez le numéro correspondant à l'option voulue");
 		Scanner scan = new Scanner(System.in);
 		int choice = scan.nextInt();
 		if(choice==1) {
@@ -100,11 +150,13 @@ public class Saisie {
 				saisie();
 			} while (continu.matches("oui") == true );
 		} else if(choice==2) {
-			modifier(rep);
+			modifier();
 		} else if (choice ==3) {
-			delete(rep);
+			delete();
 		} else if (choice ==4) {
-			tolist(rep);
+			tolist();
+		} else if(choice ==5){
+			System.exit(0);
 		} else {
 			System.out.println("Ce numéro ne correspond à aucune option");
 		}
@@ -115,6 +167,12 @@ public class Saisie {
 	
 	public static void main(String[] args) {
 		
+		try {
+			write();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 		do {
 		step();

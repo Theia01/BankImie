@@ -1,16 +1,22 @@
-package application;
-
-import java.time.LocalDate;
+package fr.imie.bank.model;
+import java.util.Date;
 
 public class Person {
 private String firstname;
 private String lastname;
 private String email;
-private LocalDate birthdate;
+private Date birthdate;
 private int id;
 
+public Person(String lastname, String firstname, String email, Date birthday) {
+	super();
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.email = email;
+	this.birthdate = birthday;
+}
 
-public Person(int id, String lastname, String firstname, String email, LocalDate birthday) {
+public Person(int id, String lastname, String firstname, String email, Date birthday) {
 	super();
 	this.id = id;
 	this.firstname = firstname;
@@ -45,10 +51,10 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
-public LocalDate getBirthday() {
+public Date getBirthday() {
 	return birthdate;
 }
-public void setBirthdate(LocalDate birthday) {
+public void setBirthdate(Date birthday) {
 	this.birthdate = birthday;
 }
 
