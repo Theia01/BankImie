@@ -14,14 +14,9 @@ public class DateUtils {
 
 
 
-	public static Date toDate(String text) {
-			Date d = null;
-		    try {
-				d = new SimpleDateFormat("dd/MM/yyyy").parse(text);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  
+	public static LocalDate toDate(String text) throws ParseException {
+			LocalDate d = null;
+		    d =  LocalDate.parse(text, fr);  
 		    return d;
 	}
 
@@ -30,8 +25,8 @@ public class DateUtils {
 		return t;
 	}
 
-	public static java.sql.Date convertUtilToSql(java.util.Date uDate) {
-        java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+	public static java.sql.Date convertUtilToSql(LocalDate date) {
+        java.sql.Date sDate = java.sql.Date.valueOf(date);
         return sDate;
     }
 	

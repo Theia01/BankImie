@@ -1,14 +1,17 @@
 package fr.imie.bank.model;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Person {
+private int id;
 private String firstname;
 private String lastname;
 private String email;
-private Date birthdate;
-private int id;
+private LocalDate birthdate;
+private ArrayList<BankAccount> accounts = new ArrayList<>();
 
-public Person(String lastname, String firstname, String email, Date birthday) {
+public Person(String lastname, String firstname, String email, LocalDate birthday) {
 	super();
 	this.firstname = firstname;
 	this.lastname = lastname;
@@ -16,7 +19,7 @@ public Person(String lastname, String firstname, String email, Date birthday) {
 	this.birthdate = birthday;
 }
 
-public Person(int id, String lastname, String firstname, String email, Date birthday) {
+public Person(int id,String lastname, String firstname, String email, LocalDate birthday) {
 	super();
 	this.id = id;
 	this.firstname = firstname;
@@ -25,17 +28,6 @@ public Person(int id, String lastname, String firstname, String email, Date birt
 	this.birthdate = birthday;
 }
 
-public Person() {
-	// TODO Auto-generated constructor stub
-}
-
-public int getId() {
-	return id;
-}
-
-public void setId(int id) {
-	this.id = id;
-}
 
 public String getFirstname() {
 	return firstname;
@@ -55,16 +47,36 @@ public String getEmail() {
 public void setEmail(String email) {
 	this.email = email;
 }
-public Date getBirthday() {
+public LocalDate getBirthday() {
 	return birthdate;
 }
-public void setBirthdate(Date birthday) {
+public void setBirthdate(LocalDate birthday) {
 	this.birthdate = birthday;
 }
 
-public String toString() {
+public ArrayList<BankAccount> getAccounts() {
+	return accounts;
+}
+
+public void setAccounts(ArrayList<BankAccount> accounts) {
+	this.accounts = accounts;
+}
+
+public void addAccount(BankAccount bacc) {
+	this.getAccounts().add(bacc);
+}
+
+	public String toString() {
 	String s = this.getFirstname() + " " + this.getLastname() + " " + this.getEmail() + " " + this.getBirthday();
 	return s;
+}
+
+public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
 }
 
 }

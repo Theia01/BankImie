@@ -8,6 +8,7 @@ import fr.imie.bank.model.PersonDaoCsvImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -34,7 +35,7 @@ public class PersonInterface {
 						DatePickerBirthDay.getValue() != null){
 			System.out.print("work finish");
 			
-			Person p = new Person(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DateUtils.LocaltoDate(DatePickerBirthDay.getValue()));
+			Person p = new Person(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DatePickerBirthDay.getValue());
 			try {
 				fonctionsql.save(p);
 			} catch (DALException e) {
@@ -49,9 +50,15 @@ public class PersonInterface {
 		}
 	}
 	
+	@FXML
 	public void ListPersonneDbb() {
-		tablePerson.setColumns();
-
+		tablePerson.setEditable(true);
+ 
+        TableColumn firstNameCol = new TableColumn("First Name");
+        TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+        
+        tablePerson.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
 	}
 
 }
