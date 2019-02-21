@@ -33,7 +33,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				rs = stmt.executeQuery(SQL_SELECT);
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
-					Person p = pers.findById(rs.getInt(2));
+					Person p = (Person) pers.findById(rs.getInt(2));
 					el= new BankAccount(rs.getString(2),rs.getBigDecimal(3),p);
 					acc.add(el);
 				}
@@ -73,7 +73,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				rs = stmt.executeQuery();
 				while (rs.next()){
 					PersonDao pers = new PersonDaoCsvImpl();
-					Person p = pers.findById(rs.getInt(2));
+					Person p = (Person) pers.findById(rs.getInt(2));
 					b = new BankAccount(rs.getString(2),rs.getBigDecimal(3),p);
 				}
 			} catch (SQLException e) {

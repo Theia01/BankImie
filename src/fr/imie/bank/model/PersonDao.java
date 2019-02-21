@@ -4,14 +4,14 @@ import java.util.List;
 
 import application.DALException;
 
-public interface PersonDao {
+public interface PersonDao<quiTuVeux> {
 
-	public List<Person> findAll() throws DALException ;
+	public List<quiTuVeux> findAll() throws DALException ;
 
-	public Person findById(int id) throws DALException;
+	public quiTuVeux findById(int id) throws DALException;
 
-	public void save(Person person)  throws DALException;
+	public void save(quiTuVeux person)  throws DALException;
 
-	public void saveAll(List<Person> people);
+	public void saveAll(List<quiTuVeux> people);
 
 }

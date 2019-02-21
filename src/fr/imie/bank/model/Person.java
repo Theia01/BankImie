@@ -29,42 +29,20 @@ public Person(int id,String lastname, String firstname, String email, LocalDate 
 	this.birthdate = birthday;
 }
 
-public String getFirstname() {
-	return firstname;
-}
-public void setFirstname(String firstname) {
-	this.firstname = firstname;
-}
-public String getLastname() {
-	return lastname;
-}
-public void setLastname(String lastname) {
-	this.lastname = lastname;
-}
-public String getEmail() {
-	return email;
-}
-public void setEmail(String email) {
-	this.email = email;
-}
-public LocalDate getBirthday() {
-	return birthdate;
-}
-public void setBirthdate(LocalDate birthday) {
-	this.birthdate = birthday;
-}
+public String getFirstname() {return firstname;}
+public void setFirstname(String firstname) {this.firstname = firstname;}
 
-public ArrayList<BankAccount> getAccounts() {
-	return accounts;
-}
+public String getLastname() {return lastname;}
+public void setLastname(String lastname) {this.lastname = lastname;}
 
-public void setAccounts(ArrayList<BankAccount> accounts) {
-	this.accounts = accounts;
-}
+public String getEmail() {return email;}
+public void setEmail(String email) {this.email = email;}
 
-public void addAccount(BankAccount bacc) {
-	this.getAccounts().add(bacc);
-}
+public LocalDate getBirthday() {return birthdate;}
+public void setBirthdate(LocalDate birthday) {this.birthdate = birthday;}
+
+public ArrayList<BankAccount> getAccounts() {return accounts;}
+public void setAccounts(ArrayList<BankAccount> accounts) {this.accounts = accounts;}
 
 	public String toString() {
 	String s = this.getFirstname() + " " + this.getLastname() + " " + this.getEmail() + " " + this.getBirthday();

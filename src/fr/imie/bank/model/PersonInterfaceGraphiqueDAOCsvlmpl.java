@@ -1,5 +1,4 @@
 package fr.imie.bank.model;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +12,7 @@ import application.DALException;
 import application.JdbcTools;
 import fr.imie.bank.DateUtils;
 
-public class PersonDaoCsvImpl implements PersonDao<Person> {
+public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInterfaceGraphique> {
 	private static final String SQL_SELECT="select * from contact ORDER BY lastname";
 	// private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM contact WHERE id=?";
@@ -24,9 +23,9 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	
 	
 	@Override
-	public List<Person> findAll() throws DALException {
-			List<Person> rep =new ArrayList<>();
-			Person el=null;
+	public List<PersonInterfaceGraphique> findAll() throws DALException {
+			List<PersonInterfaceGraphique> rep = new ArrayList<>();
+			PersonInterfaceGraphique el=null;
 			ResultSet rs = null;
 			Statement stmt=null;
 			Connection connexion =null;
@@ -35,7 +34,7 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 				stmt = connexion.createStatement();
 				rs = stmt.executeQuery(SQL_SELECT);
 				while (rs.next()){
-					el= new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate() );
+					el= new PersonInterfaceGraphique(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate() );
 					rep.add(el);
 				}
 			} catch (SQLException e) {
@@ -67,8 +66,8 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	}
 
 	@Override
-	public Person findById(int id) throws DALException {
-		Person p=null;
+	public PersonInterfaceGraphique findById(int id) throws DALException {
+		PersonInterfaceGraphique p=null;
 		ResultSet rs = null;
 
 		PreparedStatement stmt=null;
@@ -80,7 +79,7 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 			rs = stmt.executeQuery();
 			while (rs.next()){
 
-				p= new Person(id,rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
+				p= new PersonInterfaceGraphique(id,rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
 
 
 			}
@@ -109,7 +108,7 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	}
 
 	@Override
-	public void save(Person person) throws DALException  {
+	public void save(PersonInterfaceGraphique person) throws DALException  {
 		ResultSet rs = null;
 		PreparedStatement stmt=null;
 		Connection connexion =null;
@@ -145,7 +144,7 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	}
 	
 	@Override
-	public void saveAll(List<Person> people) {
+	public void saveAll(List<PersonInterfaceGraphique> people) {
 		for(int i =0; i<people.size();i++) {
 			try {
 				save(people.get(i));
