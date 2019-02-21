@@ -25,6 +25,10 @@ public Person(int id, String lastname, String firstname, String email, Date birt
 	this.birthdate = birthday;
 }
 
+public Person() {
+	// TODO Auto-generated constructor stub
+}
+
 public int getId() {
 	return id;
 }

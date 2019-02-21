@@ -8,13 +8,16 @@ import fr.imie.bank.model.PersonDaoCsvImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 public class PersonInterface {
 	@FXML private TextField TextFieldFirstName;
 	@FXML private TextField TextFieldLastName;
 	@FXML private TextField TextFielEmail;
 	@FXML private DatePicker DatePickerBirthDay;
+	@FXML private TableView tablePerson;
 
 	PersonDao fonctionsql = new PersonDaoCsvImpl();
 	
@@ -44,6 +47,11 @@ public class PersonInterface {
 				DatePickerBirthDay.setValue(null);
 			}
 		}
+	}
+	
+	public void ListPersonneDbb() {
+		tablePerson.setColumns();
+
 	}
 
 }
