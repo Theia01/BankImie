@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -33,4 +34,10 @@ public class DateUtils {
         java.sql.Date sDate = new java.sql.Date(uDate.getTime());
         return sDate;
     }
+	
+	public static Date LocaltoDate(LocalDate localDate) {
+		Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		return date;
+		
+	}
 }

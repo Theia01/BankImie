@@ -13,7 +13,9 @@ public class MainConsole {
 	public static void main(String[] args) {
 		
 		Person t = new Person("Jean-Michel","Legros","jml@gmail.com", DateUtils.toDate("11/02/1998") );
+		
 		PersonDao pers = new PersonDaoCsvImpl();
+		
 		try {
 			pers.save(t);
 		} catch (DALException e) {
