@@ -15,7 +15,7 @@ public class DateUtils {
 
 
 	public static LocalDate toDate(String text) throws ParseException {
-		    d =  LocalDate.parse(text, fr);  
+		    LocalDate d =  LocalDate.parse(text, fr);  
 		    return d;
 	}
 

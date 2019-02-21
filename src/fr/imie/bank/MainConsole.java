@@ -36,11 +36,11 @@ public class MainConsole {
 		}
 		
 
-		BankAccount b1 = new BankAccount(1514651654, s,t);
+		// BankAccount b1 = new BankAccount(1514651654, s,t);
 
-		
+	/*	
 		try {
-			b1 = new BankAccount(1514651654, s, pers.findById(3));
+			//b1 = new BankAccount(1514651654, s, pers.findById(3));
 		} catch (DALException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -48,11 +48,11 @@ public class MainConsole {
 		
 		BankAccountDao bdao = new BankAccountDaoCsvImpl();
 		try {
-			bdao.save(b1);
+			//bdao.save(b1);
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
+		} */
+	} 
 
 }
