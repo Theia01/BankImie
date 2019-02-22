@@ -20,7 +20,7 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	private static final String SQL_DELETE_BY_ID="delete from contact where id=?";
 	private static final String SQL_DELETE_ALL="delete from contact";
 	private static final String SQL_INSERT="INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
-	//private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
+	private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
 	
 	
 	
@@ -168,6 +168,43 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DALException("save failed", e);
+		}
+		finally {
+			try {
+				if (rs != null){
+					rs.close();
+				}
+				if (stmt != null){
+					stmt.close();
+				}
+				if(connexion!=null){
+					connexion.close();
+				}
+			} catch (SQLException e) {
+				throw new DALException("Close failed", e);
+			}
+	}
+		
+	}
+	
+	@Override
+	public void update(Person person) throws DALException  {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
+		try {
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_UPDATE,Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, person.getFirstname());
+			stmt.setString(2, person.getLastname());
+			stmt.setString(3, person.getEmail());
+			stmt.setDate(4,  DateUtils.convertUtilToSql(person.getBirthday()));
+			stmt.setInt(5, person.getId());
+			
+			rs = stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new DALException("update failed", e);
 		}
 		finally {
 			try {

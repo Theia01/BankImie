@@ -20,4 +20,6 @@ public interface PersonDao<quiTuVeux> {
 	
 	public void deleteById(int id) throws DALException;
 
+	void update(quiTuVeux person) throws DALException;
+
 }
