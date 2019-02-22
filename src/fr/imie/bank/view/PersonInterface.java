@@ -8,6 +8,9 @@ import fr.imie.bank.model.Person;
 import fr.imie.bank.model.PersonDao;
 import fr.imie.bank.model.PersonDaoCsvImpl;
 import fr.imie.bank.model.PersonInterfaceGraphique;
+import fr.imie.bank.model.PersonInterfaceGraphiqueDAOCsvlmpl;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -33,7 +36,9 @@ public class PersonInterface {
     @FXML private Label emailLabel;
     @FXML private Label birthdayLabel;
     
-    PersonDao fonctionsql = new PersonDaoCsvImpl();
+    private ObservableList<PersonInterfaceGraphique> personData = FXCollections.observableArrayList();
+    private PersonInterfaceGraphiqueDAOCsvlmpl a = new PersonInterfaceGraphiqueDAOCsvlmpl();
+    
     
     // Reference to the main application.
     private MainApp mainApp;
@@ -86,9 +91,10 @@ public class PersonInterface {
 	@FXML
 	public void VerificationAdd() {
 		if(isInputAjouterValid()){
-			Person p = new Person(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DatePickerBirthDay.getValue());
+			PersonInterfaceGraphique p = new PersonInterfaceGraphique(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DatePickerBirthDay.getValue());
+			
 			try {
-				fonctionsql.save(p);
+				a.save(p);
 			} catch (DALException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
