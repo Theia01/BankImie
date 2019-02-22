@@ -10,9 +10,8 @@ import java.util.List;
 
 import application.DALException;
 import application.JdbcTools;
-import fr.imie.bank.DateUtils;
 
-public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
+public class BankAccountInterfaceGraphiqueDaoCsvImpl implements BankAccountDao<BankAccountInterfaceGaphique> {
 	private static final String SQL_SELECT = "select * from account";
 	// private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE
 	// lastname LIKE ? OR firstname LIKE ?;";
@@ -23,9 +22,9 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 	// lastname=?,email=?,birthdate=? WHERE id=?;";
 
 	@Override
-	public List<BankAccount> findAll() throws DALException {
-		List<BankAccount> acc = new ArrayList<>();
-		BankAccount el = null;
+	public List<BankAccountInterfaceGaphique> findAll() throws DALException {
+		List<BankAccountInterfaceGaphique> acc = new ArrayList<>();
+		BankAccountInterfaceGaphique el = null;
 		ResultSet rs = null;
 		Statement stmt = null;
 		Connection connexion = null;
@@ -34,9 +33,9 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 			stmt = connexion.createStatement();
 			rs = stmt.executeQuery(SQL_SELECT);
 			while (rs.next()) {
-				PersonDao pers = new PersonDaoCsvImpl();
-				Person p = (Person) pers.findById(rs.getInt(2));
-				el = new BankAccount(rs.getString(2), rs.getBigDecimal(3), p);
+				PersonDao<PersonInterfaceGraphique> pers = new PersonInterfaceGraphiqueDAOCsvlmpl();
+				PersonInterfaceGraphique p = (PersonInterfaceGraphique) pers.findById(rs.getInt(2));
+				el = new BankAccountInterfaceGaphique(rs.getString(2), rs.getBigDecimal(3), p);
 				acc.add(el);
 			}
 		} catch (SQLException e) {
@@ -60,8 +59,8 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 	}
 
 	@Override
-	public BankAccount findById(int id) throws DALException {
-		BankAccount b = null;
+	public BankAccountInterfaceGaphique findById(int id) throws DALException {
+		BankAccountInterfaceGaphique b = null;
 		ResultSet rs = null;
 
 		PreparedStatement stmt = null;
@@ -72,9 +71,9 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				PersonDao pers = new PersonDaoCsvImpl();
-				Person p = (Person) pers.findById(rs.getInt(2));
-				b = new BankAccount(rs.getString(2), rs.getBigDecimal(3), p);
+				PersonDao<PersonInterfaceGraphique> pers = new PersonInterfaceGraphiqueDAOCsvlmpl();
+				PersonInterfaceGraphique p = (PersonInterfaceGraphique) pers.findById(rs.getInt(2));
+				b = new BankAccountInterfaceGaphique(rs.getString(2), rs.getBigDecimal(3), p);
 			}
 		} catch (SQLException e) {
 			throw new DALException("selectAll failed", e);
@@ -99,14 +98,14 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 	}
 
 	@Override
-	public void save(BankAccount acc) throws DALException {
+	public void save(BankAccountInterfaceGaphique acc) throws DALException {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		Connection connexion = null;
 		try {
 			connexion = JdbcTools.getConnection();
 			stmt = connexion.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, acc.getOwner().getId());
+			stmt.setInt(1, acc.getOwner().getId().get());
 			stmt.setString(2, acc.getNumber());
 			stmt.setString(3, acc.getBalance().toString());
 
@@ -133,7 +132,7 @@ public class BankAccountDaoCsvImpl implements BankAccountDao<BankAccount> {
 	}
 
 	@Override
-	public void saveAll(List<BankAccount> list_acc) {
+	public void saveAll(List<BankAccountInterfaceGaphique> list_acc) {
 		for (int i = 0; i < list_acc.size(); i++) {
 			try {
 				save(list_acc.get(i));

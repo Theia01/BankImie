@@ -4,15 +4,15 @@ import java.util.List;
 
 import application.DALException;
 
-public interface BankAccountDao {
+public interface BankAccountDao<quiTuVeux> {
 	
-		public List<BankAccount> findAll()  throws DALException;
+		public List<quiTuVeux> findAll()  throws DALException;
 
-		public BankAccount findById(int id)  throws DALException;
+		public quiTuVeux findById(int id)  throws DALException;
 
-		public void save(BankAccount person)  throws DALException;
+		public void save(quiTuVeux person)  throws DALException;
 
-		public void saveAll(List<BankAccount> people);
+		public void saveAll(List<quiTuVeux> people);
 		
 	
 }

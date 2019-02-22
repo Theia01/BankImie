@@ -110,7 +110,7 @@
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" GridPane.rowIndex="2" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Naissance" GridPane.rowIndex="3" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Compte" GridPane.rowIndex="4" />
-                                          <Button mnemonicParsing="false" text="Voir" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Button mnemonicParsing="false" onAction="#handleComptePerson" text="Voir" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                        </children>
                                     </GridPane>
                                  </children>

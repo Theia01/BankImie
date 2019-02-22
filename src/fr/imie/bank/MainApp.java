@@ -1,10 +1,10 @@
 package fr.imie.bank;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 import fr.imie.bank.model.PersonInterfaceGraphique;
 import fr.imie.bank.model.PersonInterfaceGraphiqueDAOCsvlmpl;
+import fr.imie.bank.view.CompteViewController;
 import fr.imie.bank.view.PersonEditDialogController;
 import fr.imie.bank.view.PersonInterface;
 import javafx.application.Application;
@@ -118,7 +118,7 @@ public class MainApp extends Application {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Person");
+            dialogStage.setTitle("Edition Personne");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -150,4 +150,35 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+	public boolean showPersonCompteDialog(PersonInterfaceGraphique selectedPerson) {
+		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/CompteView.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Voir Comptes");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            CompteViewController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            
+            controller.AfficheCompte(selectedPerson);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+	}
 }

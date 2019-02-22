@@ -1,4 +1,5 @@
 package fr.imie.bank.model;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -18,9 +19,8 @@ public class PersonInterfaceGraphique {
 	private ObjectProperty<LocalDate> birthday;
 	private ArrayList<BankAccount> accounts = new ArrayList<>();
 
-	
-	
-	public PersonInterfaceGraphique() {}
+	public PersonInterfaceGraphique() {
+	}
 
 	public PersonInterfaceGraphique(String firstname, String lastname, String email, LocalDate birthday) {
 		super();
@@ -30,7 +30,6 @@ public class PersonInterfaceGraphique {
 		this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
 	}
 
-
 	public PersonInterfaceGraphique(int id, String firstname, String lastname, String email, LocalDate birthday) {
 		super();
 		this.id = new SimpleIntegerProperty(id);
@@ -39,35 +38,82 @@ public class PersonInterfaceGraphique {
 		this.email = new SimpleStringProperty(email);
 		this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
 	}
+
+	public IntegerProperty getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id.set(id);
+	}
 	
-	public IntegerProperty getId() {return id;}
-	public void setId(int id) {this.id.set(id);}
-	
-	public String getFirstname() {return firstname.get();}
-	public void setFirstname(String firstname) {this.firstname.set(firstname);}
-	public StringProperty firstnameProperty() {return firstname;} 
+	public IntegerProperty idProperty() {
+		return id;
+	}
 
-	public String getLastname() {return lastname.get();}
-	public void setLastname(String lastname) {this.lastname.set(lastname);}
-	public StringProperty lastnameProperty() {return lastname;}
+	public String getFirstname() {
+		return firstname.get();
+	}
 
-	public String getEmail() {return email.get();}
-	public void setEmail(String email) {this.email.set(email);}
-	public StringProperty emailProperty() {return email;}
+	public void setFirstname(String firstname) {
+		this.firstname.set(firstname);
+	}
 
-	public LocalDate getBirthday() {return birthday.get();}
-	public void setBirthday(LocalDate birthday) {this.birthday.set(birthday);}
-	public ObjectProperty<LocalDate> birthdayProperty() {return birthday;}
+	public StringProperty firstnameProperty() {
+		return firstname;
+	}
 
-	public ArrayList<BankAccount> getAccounts() {return accounts;}
-	public void setAccounts(ArrayList<BankAccount> accounts) {this.accounts = accounts;}
-	public void addAccount(BankAccount bacc) {this.getAccounts().add(bacc);}
+	public String getLastname() {
+		return lastname.get();
+	}
 
-		public String toString() {
+	public void setLastname(String lastname) {
+		this.lastname.set(lastname);
+	}
+
+	public StringProperty lastnameProperty() {
+		return lastname;
+	}
+
+	public String getEmail() {
+		return email.get();
+	}
+
+	public void setEmail(String email) {
+		this.email.set(email);
+	}
+
+	public StringProperty emailProperty() {
+		return email;
+	}
+
+	public LocalDate getBirthday() {
+		return birthday.get();
+	}
+
+	public void setBirthday(LocalDate birthday) {
+		this.birthday.set(birthday);
+	}
+
+	public ObjectProperty<LocalDate> birthdayProperty() {
+		return birthday;
+	}
+
+	public ArrayList<BankAccount> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(ArrayList<BankAccount> accounts) {
+		this.accounts = accounts;
+	}
+
+	public void addAccount(BankAccount bacc) {
+		this.getAccounts().add(bacc);
+	}
+
+	public String toString() {
 		String s = this.getFirstname() + " " + this.getLastname() + " " + this.getEmail() + " " + this.getBirthday();
 		return s;
 	}
 
-
-	
 }

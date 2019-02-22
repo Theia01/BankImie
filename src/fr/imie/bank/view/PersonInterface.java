@@ -240,6 +240,27 @@ public class PersonInterface {
 	    }
 	}
 	
+	@FXML
+	private void handleComptePerson() {
+		PersonInterfaceGraphique selectedPerson = tablePerson.getSelectionModel().getSelectedItem();
+	    if (selectedPerson != null) {
+	        boolean okClicked = mainApp.showPersonCompteDialog(selectedPerson);
+	        if (okClicked) {
+	            showPersonDetails(selectedPerson);
+	        }
+
+	    } else {
+	        // Nothing selected.
+	        Alert alert = new Alert(AlertType.WARNING);
+	        alert.initOwner(mainApp.getPrimaryStage());
+	        alert.setTitle("Aucune Selection");
+	        alert.setHeaderText("Aucune Personne Selectionné");
+	        alert.setContentText("Veuillez sélectionner une personne dans le tableau");
+
+	        alert.showAndWait();
+	    }
+	}
+	
 	
 	
 }
