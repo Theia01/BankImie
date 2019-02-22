@@ -4,13 +4,8 @@ package fr.imie.bank.view;
 import application.DALException;
 import fr.imie.bank.DateUtils;
 import fr.imie.bank.MainApp;
-import fr.imie.bank.model.Person;
-import fr.imie.bank.model.PersonDao;
-import fr.imie.bank.model.PersonDaoCsvImpl;
 import fr.imie.bank.model.PersonInterfaceGraphique;
 import fr.imie.bank.model.PersonInterfaceGraphiqueDAOCsvlmpl;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -36,7 +31,6 @@ public class PersonInterface {
     @FXML private Label emailLabel;
     @FXML private Label birthdayLabel;
     
-    private ObservableList<PersonInterfaceGraphique> personData = FXCollections.observableArrayList();
     private PersonInterfaceGraphiqueDAOCsvlmpl a = new PersonInterfaceGraphiqueDAOCsvlmpl();
     
     
@@ -92,11 +86,10 @@ public class PersonInterface {
 	public void VerificationAdd() {
 		if(isInputAjouterValid()){
 			PersonInterfaceGraphique p = new PersonInterfaceGraphique(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DatePickerBirthDay.getValue());
-			
+		    
 			try {
 				a.save(p);
 			} catch (DALException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
 				TextFieldFirstName.setText("");
@@ -104,6 +97,15 @@ public class PersonInterface {
 				TextFielEmail.setText("");
 				DatePickerBirthDay.setValue(null);
 			}
+			
+			
+			try {
+				p = a.lastId();
+			} catch (DALException e1) {
+				e1.getMessage();
+			}
+		    
+			mainApp.getPersonData().add(p);
 	    }
 	}
 	
@@ -169,10 +171,25 @@ public class PersonInterface {
 	 */
 	@FXML
 	private void handleDeletePerson() {
+		
+		PersonInterfaceGraphique selectedPerson = tablePerson.getSelectionModel().getSelectedItem();
+	    if (selectedPerson != null) {
+	        	System.out.println(selectedPerson.getId());
+	        	try {
+					a.deleteById(selectedPerson.getId().get());
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	        
+	        	
+	        }
+		
 	    int selectedIndex = tablePerson.getSelectionModel().getSelectedIndex();
 	    //si l'utilisateur a bien sélectionner une personne
 	    if (selectedIndex >= 0) {
 	    	tablePerson.getItems().remove(selectedIndex);
+	    	
 	    } else {
 	        // Nothing selected.
 	        Alert alert = new Alert(AlertType.WARNING);

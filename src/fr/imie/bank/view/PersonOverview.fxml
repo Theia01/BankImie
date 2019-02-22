@@ -65,7 +65,7 @@
             <TextField fx:id="TextFieldLastName" layoutX="290.0" layoutY="312.0" prefHeight="25.0" prefWidth="300.0" promptText="Nom" />
             <TextField fx:id="TextFielEmail" layoutX="290.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="exemple@email.pro" />
             <DatePicker fx:id="DatePickerBirthDay" layoutX="290.0" layoutY="378.0" prefHeight="25.0" prefWidth="150.0" promptText="00/00/0000" />
-            <Button layoutX="475.0" layoutY="370.0" minWidth="8.0" mnemonicParsing="false" onAction="#VerificationAdd" prefHeight="25.0" prefWidth="100.0" text="Ajouter" textOverrun="CLIP" />
+            <Button layoutX="476.0" layoutY="378.0" minWidth="8.0" mnemonicParsing="false" onAction="#VerificationAdd" prefHeight="25.0" prefWidth="100.0" text="Ajouter" textOverrun="CLIP" />
             <SplitPane dividerPositions="0.46321070234113715" layoutY="51.0" prefHeight="226.0" prefWidth="600.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

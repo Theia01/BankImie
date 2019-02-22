@@ -1,7 +1,9 @@
 package fr.imie.bank.view;
 
+import application.DALException;
 import fr.imie.bank.DateUtils;
 import fr.imie.bank.model.PersonInterfaceGraphique;
+import fr.imie.bank.model.PersonInterfaceGraphiqueDAOCsvlmpl;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,6 +20,8 @@ public class PersonEditDialogController {
     private Stage dialogStage;
     private PersonInterfaceGraphique person;
     private boolean okClicked = false;
+    
+    private PersonInterfaceGraphiqueDAOCsvlmpl fonctionSql = new PersonInterfaceGraphiqueDAOCsvlmpl();
     
     /**
      * Initializes the controller class. This method is automatically called
@@ -70,6 +74,12 @@ public class PersonEditDialogController {
             person.setLastname(lastNameField.getText());
             person.setEmail(emailField.getText());
             person.setBirthday(DateUtils.parse(birthdayField.getText()));
+            try {
+				fonctionSql.update(person);
+			} catch (DALException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
             okClicked = true;
             dialogStage.close();

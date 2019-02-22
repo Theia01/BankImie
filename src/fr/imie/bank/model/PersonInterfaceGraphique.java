@@ -22,7 +22,7 @@ public class PersonInterfaceGraphique {
 	
 	public PersonInterfaceGraphique() {}
 
-	public PersonInterfaceGraphique(String lastname, String firstname, String email, LocalDate birthday) {
+	public PersonInterfaceGraphique(String firstname, String lastname, String email, LocalDate birthday) {
 		super();
 		this.firstname = new SimpleStringProperty(firstname);
 		this.lastname = new SimpleStringProperty(lastname);
@@ -31,7 +31,7 @@ public class PersonInterfaceGraphique {
 	}
 
 
-	public PersonInterfaceGraphique(int id,String lastname, String firstname, String email, LocalDate birthday) {
+	public PersonInterfaceGraphique(int id, String firstname, String lastname, String email, LocalDate birthday) {
 		super();
 		this.id = new SimpleIntegerProperty(id);
 		this.firstname = new SimpleStringProperty(firstname);
@@ -65,8 +65,8 @@ public class PersonInterfaceGraphique {
 		return s;
 	}
 
-	public int getId() {
-		return id.get();
+	public IntegerProperty getId() {
+		return id;
 	}
 
 	public void setId(int id) {

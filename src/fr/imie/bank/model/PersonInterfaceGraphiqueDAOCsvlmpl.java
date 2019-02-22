@@ -20,6 +20,48 @@ public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInter
 	private static final String SQL_DELETE_ALL="delete from contact";
 	private static final String SQL_INSERT="INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
 	private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
+	private static final String SQL_LAST_ID="SELECT * FROM `contact`  ORDER BY id DESC LIMIT 1;";
+	
+	@Override
+    public PersonInterfaceGraphique lastId() throws DALException {
+    ResultSet rs = null;
+    PersonInterfaceGraphique p = new PersonInterfaceGraphique();
+    PreparedStatement stmt=null;
+    Connection connexion =null;
+    try {
+        connexion = JdbcTools.getConnection();
+        stmt = connexion.prepareStatement(SQL_LAST_ID,Statement.RETURN_GENERATED_KEYS);
+        rs = stmt.executeQuery();
+        while (rs.next()){
+
+            p= new PersonInterfaceGraphique(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
+
+
+        }
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+            throw new DALException("select last failed", e);
+        
+    }
+    finally {
+        try {
+            if (rs != null){
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+            if(connexion!=null){
+                connexion.close();
+            }
+        } catch (SQLException e) {
+            throw new DALException("Close failed", e);
+        }
+}
+    return p;
+        
+    }
+	
 	
 	
 	
@@ -271,7 +313,7 @@ public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInter
 			stmt.setString(2, person.getLastname());
 			stmt.setString(3, person.getEmail());
 			stmt.setDate(4,  DateUtils.convertUtilToSql(person.getBirthday()));
-			stmt.setInt(5, person.getId());
+			stmt.setInt(5, person.getId().get());
 			
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {

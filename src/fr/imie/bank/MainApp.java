@@ -38,15 +38,6 @@ public class MainApp extends Application {
     		while(li.hasNext()) {
     			personData.add(li.next());}
     	} catch (DALException e) {e.printStackTrace();}
-    	
-    	// Add some sample data
-    	try {
-			personData.add(new PersonInterfaceGraphique("Hans", "Muster", "h@hjk", DateUtils.toDate("11/11/1111")));
-			personData.add(new PersonInterfaceGraphique("Johan", "Murder", "h@hjk", DateUtils.toDate("11/12/1666")));
-			personData.add(new PersonInterfaceGraphique("Alexandre", "LoverAbsent", "h@hjk", DateUtils.toDate("11/09/1169")));
-			
-		} catch (ParseException e) {e.printStackTrace();}
-		
     }
     
     /**
