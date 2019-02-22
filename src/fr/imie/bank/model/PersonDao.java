@@ -16,4 +16,8 @@ public interface PersonDao<quiTuVeux> {
 
 	public List<quiTuVeux> findByName() throws DALException;
 
+	public void deleteAll() throws DALException;
+	
+	public void deleteById(int id) throws DALException;
+
 }

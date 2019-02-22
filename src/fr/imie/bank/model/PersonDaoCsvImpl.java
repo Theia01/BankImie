@@ -17,7 +17,8 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	private static final String SQL_SELECT="select * from contact ORDER BY lastname";
 	private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM contact WHERE id=?";
-	// private static final String SQL_DELETE="delete from contact where id=?";
+	private static final String SQL_DELETE_BY_ID="delete from contact where id=?";
+	private static final String SQL_DELETE_ALL="delete from contact";
 	private static final String SQL_INSERT="INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
 	//private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
 	
@@ -199,6 +200,65 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 		
 	}
 
+	public void deleteById(int id) throws DALException{
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
+		try {
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_DELETE_BY_ID,Statement.RETURN_GENERATED_KEYS);
+			stmt.setInt(1, id);
+			rs = stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new DALException("delete by id failed", e);
+		}
+		finally {
+			try {
+				if (rs != null){
+					rs.close();
+				}
+				if (stmt != null){
+					stmt.close();
+				}
+				if(connexion!=null){
+					connexion.close();
+				}
+			} catch (SQLException e) {
+				throw new DALException("Close failed", e);
+			}
+	}
+	}
+	
+	@Override
+	public void deleteAll() throws DALException {
+		ResultSet rs = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
+		try {
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_DELETE_ALL,Statement.RETURN_GENERATED_KEYS);
+			rs = stmt.executeQuery();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new DALException("delete all failed", e);
+		}
+		finally {
+			try {
+				if (rs != null){
+					rs.close();
+				}
+				if (stmt != null){
+					stmt.close();
+				}
+				if(connexion!=null){
+					connexion.close();
+				}
+			} catch (SQLException e) {
+				throw new DALException("Close failed", e);
+			}
+	}
+	}
 	// TODO utiliser FileWriter et BufferedReader/FileReader
 
 }
