@@ -39,7 +39,10 @@ public class PersonInterfaceGraphique {
 		this.email = new SimpleStringProperty(email);
 		this.birthday = new SimpleObjectProperty<LocalDate>(birthday);
 	}
-
+	
+	public IntegerProperty getId() {return id;}
+	public void setId(int id) {this.id.set(id);}
+	
 	public String getFirstname() {return firstname.get();}
 	public void setFirstname(String firstname) {this.firstname.set(firstname);}
 	public StringProperty firstnameProperty() {return firstname;} 
@@ -65,12 +68,6 @@ public class PersonInterfaceGraphique {
 		return s;
 	}
 
-	public IntegerProperty getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id.set(id);
-	}
-
+	
 }

@@ -2,18 +2,14 @@ package fr.imie.bank.model;
 
 import java.math.BigDecimal;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
-
-public class BankAccount {
-	private StringProperty number;
-	private ObjectProperty<BigDecimal> balance;
-	private PersonInterfaceGraphique owner;
+public class BankAccountInterfaceGaphique {
+	private String number;
+	private BigDecimal balance;
+	private Person owner;
 	
 	
-	public BankAccount(String number,BigDecimal bal, Person owner) {
-		super();
-		this.number = new SimpleStringProperty(number);
+	public void BankAccount(String number,BigDecimal bal, Person owner) {
+		this.number = number;
 		this.setOwner(owner);
 		this.balance = bal;
 	}
@@ -40,6 +36,5 @@ public class BankAccount {
 	public void setOwner(Person owner) {
 		this.owner = owner;
 	}
-	
 	
 }

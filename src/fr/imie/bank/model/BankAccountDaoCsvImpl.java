@@ -38,7 +38,6 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 					acc.add(el);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				throw new DALException("selectAll failed", e);
 			}
 			finally {
@@ -77,7 +76,6 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 					b = new BankAccount(rs.getString(2),rs.getBigDecimal(3),p);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 					throw new DALException("selectAll failed", e);
 				
 			}
@@ -141,7 +139,6 @@ public class BankAccountDaoCsvImpl implements BankAccountDao {
 				try {
 					save(list_acc.get(i));
 				} catch (DALException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
