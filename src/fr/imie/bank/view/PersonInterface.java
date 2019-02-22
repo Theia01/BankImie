@@ -85,12 +85,7 @@ public class PersonInterface {
 	//Ajout d'un personne à la bdd
 	@FXML
 	public void VerificationAdd() {
-		if(TextFieldFirstName.getText().isEmpty() == false &&
-				TextFieldLastName.getText().isEmpty() == false &&
-					TextFielEmail.getText().isEmpty() == false &&
-						DatePickerBirthDay.getValue() != null){
-			System.out.print("work finish");
-			
+		if(isInputAjouterValid()){
 			Person p = new Person(TextFieldFirstName.getText(), TextFieldLastName.getText(), TextFielEmail.getText(), DatePickerBirthDay.getValue());
 			try {
 				fonctionsql.save(p);
@@ -103,8 +98,40 @@ public class PersonInterface {
 				TextFielEmail.setText("");
 				DatePickerBirthDay.setValue(null);
 			}
-		}
+	    }
 	}
+	
+	private boolean isInputAjouterValid() {
+        String errorMessage = "";
+
+        if (TextFieldFirstName.getText() == null || TextFieldFirstName.getText().length() == 0) {
+            errorMessage += "Prenom Invalide!\n";
+        }
+        if (TextFieldLastName.getText() == null || TextFieldLastName.getText().length() == 0) {
+            errorMessage += "Nom Invalide!\n";
+        }
+        if (TextFielEmail.getText() == null || TextFielEmail.getText().length() == 0) {
+            errorMessage += "Email invalide!\n";
+        }
+
+        if (DatePickerBirthDay.getValue() == null) {
+            errorMessage += "Date de Naissance invalide!\n";
+        }
+
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Champs Invalide");
+            alert.setHeaderText("Veuillez corriger les champs invalides");
+            alert.setContentText(errorMessage);
+
+            alert.showAndWait();
+
+            return false;
+        }
+    }
 	
 	/**
 	 * Fills all text fields to show details about the person.
@@ -119,6 +146,7 @@ public class PersonInterface {
 	        lastNameLabel.setText(person.getLastname());
 	        emailLabel.setText(person.getEmail());
 	        birthdayLabel.setText(DateUtils.format(person.getBirthday()));
+	        System.out.println(person.getId());
 	        //birthdayLabel.setText(String.valueOf(person.getBirthday()));
 		
 		}else {
@@ -145,7 +173,7 @@ public class PersonInterface {
 	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("No Selection");
 	        alert.setHeaderText("Selectionne une personne");
-	        alert.setContentText("Please select a person in the table.");
+	        alert.setContentText("Veuillez sélectionner une personne.");
 
 	        alert.showAndWait();
 	    }
@@ -183,7 +211,7 @@ public class PersonInterface {
 	        alert.initOwner(mainApp.getPrimaryStage());
 	        alert.setTitle("Aucune Selection");
 	        alert.setHeaderText("Aucune Personne Selectionné");
-	        alert.setContentText("Vueillez selectionner une personne dans le tableau");
+	        alert.setContentText("Veuillez sélectionner une personne dans le tableau");
 
 	        alert.showAndWait();
 	    }

@@ -93,20 +93,20 @@ public class PersonEditDialogController {
         String errorMessage = "";
 
         if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
-            errorMessage += "No valid first name!\n";
+            errorMessage += "Prenom Invalide!\n";
         }
         if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
-            errorMessage += "No valid last name!\n";
+            errorMessage += "Nom Invalide!\n";
         }
         if (emailField.getText() == null || emailField.getText().length() == 0) {
-            errorMessage += "No valid street!\n";
+            errorMessage += "Email invalide!\n";
         }
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "No valid birthday!\n";
+            errorMessage += "Date de Naissance invalide!\n";
         } else {
             if (!DateUtils.validDate(birthdayField.getText())) {
-                errorMessage += "No valid birthday. Use the format dd.mm.yyyy!\n";
+                errorMessage += "Date de Naissance invalide! Utilisez le format dd.mm.yyyy!\n";
             }
         }
 

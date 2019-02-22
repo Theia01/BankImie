@@ -18,9 +18,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.imie.bank.view.PersonInterface">
+<AnchorPane maxHeight="430.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.imie.bank.view.PersonInterface">
    <children>
-      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="600.0" AnchorPane.bottomAnchor="-13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Banana Financial Service" textAlignment="CENTER" underline="true" wrappingWidth="195.0">
                <font>
@@ -36,17 +36,17 @@
                </fill>
             </Text>
             <Line endY="50.0" layoutX="200.0" stroke="#00000040" />
-            <Button layoutX="220.0" layoutY="12.5" minWidth="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Search" textOverrun="CLIP" />
+            <Button layoutX="220.0" layoutY="12.5" minWidth="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Chercher" textOverrun="CLIP" />
             <TextField layoutX="337.5" layoutY="12.5" prefHeight="25.0" prefWidth="250.0" promptText="FirstName or LastName" />
-            <Button layoutX="25.0" layoutY="300.0" minWidth="8.0" mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="25.0" prefWidth="150.0" text="Modify Selection" textOverrun="CLIP" />
-            <Button layoutX="25.0" layoutY="350.0" minWidth="8.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="25.0" prefWidth="150.0" text="Delete Selection" textOverrun="CLIP" />
+            <Button layoutX="25.0" layoutY="300.0" minWidth="8.0" mnemonicParsing="false" onAction="#handleEditPerson" prefHeight="25.0" prefWidth="150.0" text="Modifier" textOverrun="CLIP" />
+            <Button layoutX="25.0" layoutY="350.0" minWidth="8.0" mnemonicParsing="false" onAction="#handleDeletePerson" prefHeight="25.0" prefWidth="150.0" text="Suprimmer" textOverrun="CLIP" />
             <Line endY="125.0" layoutX="200.0" layoutY="275.0" stroke="#00000040" />
-            <Text layoutX="201.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FirstName" textAlignment="CENTER" wrappingWidth="81.60000991821289">
+            <Text layoutX="201.0" layoutY="301.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" textAlignment="CENTER" wrappingWidth="81.60000991821289">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="201.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LastName" textAlignment="CENTER" wrappingWidth="81.60000991821289">
+            <Text layoutX="201.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" textAlignment="CENTER" wrappingWidth="81.60000991821289">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
@@ -56,16 +56,16 @@
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="201.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BirthDay" textAlignment="CENTER" wrappingWidth="81.60000991821289">
+            <Text layoutX="201.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Naissance" textAlignment="CENTER" wrappingWidth="81.60000991821289">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font>
             </Text>
-            <TextField fx:id="TextFieldFirstName" layoutX="290.0" layoutY="283.0" onAction="#Hello" prefHeight="25.0" prefWidth="300.0" promptText="FirstName" />
-            <TextField fx:id="TextFieldLastName" layoutX="290.0" layoutY="312.0" prefHeight="25.0" prefWidth="300.0" promptText="LastName" />
+            <TextField fx:id="TextFieldFirstName" layoutX="290.0" layoutY="283.0" onAction="#Hello" prefHeight="25.0" prefWidth="300.0" promptText="Prénom" />
+            <TextField fx:id="TextFieldLastName" layoutX="290.0" layoutY="312.0" prefHeight="25.0" prefWidth="300.0" promptText="Nom" />
             <TextField fx:id="TextFielEmail" layoutX="290.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="exemple@email.pro" />
-            <DatePicker fx:id="DatePickerBirthDay" layoutX="290.0" layoutY="370.0" prefHeight="25.0" prefWidth="150.0" promptText="00/00/0000" />
-            <Button layoutX="475.0" layoutY="370.0" minWidth="8.0" mnemonicParsing="false" onAction="#VerificationAdd" prefHeight="25.0" prefWidth="100.0" text="Add" textOverrun="CLIP" />
+            <DatePicker fx:id="DatePickerBirthDay" layoutX="290.0" layoutY="378.0" prefHeight="25.0" prefWidth="150.0" promptText="00/00/0000" />
+            <Button layoutX="475.0" layoutY="370.0" minWidth="8.0" mnemonicParsing="false" onAction="#VerificationAdd" prefHeight="25.0" prefWidth="100.0" text="Ajouter" textOverrun="CLIP" />
             <SplitPane dividerPositions="0.46321070234113715" layoutY="51.0" prefHeight="226.0" prefWidth="600.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
@@ -74,8 +74,8 @@
                            <content>
                               <TableView fx:id="tablePerson" prefHeight="214.0" prefWidth="600.0">
                                  <columns>
-                                    <TableColumn fx:id="firstNameColumn" prefWidth="117.6000030040741" text="FirstName" />
-                                    <TableColumn fx:id="lastNameColumn" prefWidth="111.20001220703125" text="LastName" />
+                                    <TableColumn fx:id="firstNameColumn" prefWidth="117.6000030040741" text="Prénom" />
+                                    <TableColumn fx:id="lastNameColumn" prefWidth="111.20001220703125" text="Nom" />
                                  </columns>
                               </TableView>
                            </content>
@@ -88,10 +88,10 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <GridPane layoutY="62.0" prefHeight="200.0" prefWidth="380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-180.0" AnchorPane.topAnchor="0.0">
+                                    <GridPane layoutY="62.0" prefHeight="200.0" prefWidth="318.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-118.0" AnchorPane.topAnchor="0.0">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.5999755859375" minWidth="10.0" prefWidth="72.39996337890625" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.60003662109375" minWidth="10.0" prefWidth="307.60003662109375" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.5999755859375" minWidth="10.0" prefWidth="137.59998779296876" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="307.60003662109375" minWidth="10.0" prefWidth="180.80001220703122" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -104,10 +104,10 @@
                                           <Label fx:id="lastNameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label fx:id="emailLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <Label fx:id="birthdayLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FirsName" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="LastMail" GridPane.rowIndex="1" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" GridPane.rowIndex="1" />
                                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email" GridPane.rowIndex="2" />
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Birthday" GridPane.rowIndex="3" />
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Naissance" GridPane.rowIndex="3" />
                                        </children>
                                     </GridPane>
                                  </children>
