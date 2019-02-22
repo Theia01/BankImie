@@ -14,249 +14,260 @@ import application.JdbcTools;
 import fr.imie.bank.DateUtils;
 
 public class PersonDaoCsvImpl implements PersonDao<Person> {
-	private static final String SQL_SELECT = "select * from contact ORDER BY lastname";
-	private static final String SQL_SELECT_BY_NAME = "SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
+	private static final String SQL_SELECT="select * from contact ORDER BY lastname";
+	private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM contact WHERE id=?";
-	private static final String SQL_DELETE_BY_ID = "delete from contact where id=?";
-	private static final String SQL_DELETE_ALL = "delete from contact";
-	private static final String SQL_INSERT = "INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
-	private static final String SQL_UPDATE = "UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
-	private static final String SQL_LAST_ID = "SELECT * FROM `contact`  ORDER BY id DESC LIMIT 1;";
-
+	private static final String SQL_DELETE_BY_ID="delete from contact where id=?";
+	private static final String SQL_DELETE_ALL="delete from contact";
+	private static final String SQL_INSERT="INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
+	private static final String SQL_UPDATE="UPDATE contact SET firstname=?, lastname=?,email=?,birthdate=? WHERE id=?;";
+	private static final String SQL_LAST_ID="SELECT * FROM `contact`  ORDER BY id DESC LIMIT 1;";
+	
 	@Override
-	public Person lastId() throws DALException {
-		ResultSet rs = null;
-		Person p = null;
-		PreparedStatement stmt = null;
-		Connection connexion = null;
-		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_LAST_ID, Statement.RETURN_GENERATED_KEYS);
-			rs = stmt.executeQuery();
-			while (rs.next()) {
+    public Person lastId() throws DALException {
+    ResultSet rs = null;
+    Person p = null;
+    PreparedStatement stmt=null;
+    Connection connexion =null;
+    try {
+        connexion = JdbcTools.getConnection();
+        stmt = connexion.prepareStatement(SQL_LAST_ID,Statement.RETURN_GENERATED_KEYS);
+        rs = stmt.executeQuery();
+        while (rs.next()){
 
-				p = new Person(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getDate(5).toLocalDate());
+            p= new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
 
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			throw new DALException("select last failed", e);
 
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (connexion != null) {
-					connexion.close();
-				}
-			} catch (SQLException e) {
-				throw new DALException("Close failed", e);
-			}
-		}
-		return p;
-
-	}
-
+        }
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+            throw new DALException("select last failed", e);
+        
+    }
+    finally {
+        try {
+            if (rs != null){
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+            if(connexion!=null){
+                connexion.close();
+            }
+        } catch (SQLException e) {
+            throw new DALException("Close failed", e);
+        }
+}
+    return p;
+        
+    }
+	
+	
+	
 	@Override
 	public List<Person> findAll() throws DALException {
-		List<Person> rep = new ArrayList<>();
-		Person el = null;
-		ResultSet rs = null;
-		Statement stmt = null;
-		Connection connexion = null;
-		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.createStatement();
-			rs = stmt.executeQuery(SQL_SELECT);
-			while (rs.next()) {
-				el = new Person(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getDate(5).toLocalDate());
-				rep.add(el);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			throw new DALException("selectAll failed", e);
-		} finally {
+			List<Person> rep =new ArrayList<>();
+			Person el=null;
+			ResultSet rs = null;
+			Statement stmt=null;
+			Connection connexion =null;
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (connexion != null) {
-					connexion.close();
+			    connexion = JdbcTools.getConnection();
+				stmt = connexion.createStatement();
+				rs = stmt.executeQuery(SQL_SELECT);
+				while (rs.next()){
+					el= new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate() );
+					rep.add(el);
 				}
 			} catch (SQLException e) {
-				throw new DALException("Close failed", e);
+				// TODO Auto-generated catch block
+				throw new DALException("selectAll failed", e);
 			}
-			for (int i = 0; i < rep.size(); i++) {
-				System.out.println(rep.get(i).toString());
-			}
+			finally {
+				try {
+					if (rs != null){
+						rs.close();
+					}
+					if (stmt != null){
+						stmt.close();
+					}
+					if(connexion!=null){
+						connexion.close();
+					}
+				} catch (SQLException e) {
+					throw new DALException("Close failed", e);
+				}
+				for(int i=0;i<rep.size();i++) {
+					System.out.println(rep.get(i).toString());
+				}
 		}
-		return rep;
-
+			return rep;
+			
+		
+		
 	}
-
+	
+	
 	@Override
-	public List<Person> findByName() throws DALException {
-		List<Person> rep = new ArrayList<>();
-		Person el = null;
-		ResultSet rs = null;
-		Statement stmt = null;
-		Connection connexion = null;
-		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.createStatement();
-			rs = stmt.executeQuery(SQL_SELECT_BY_NAME);
-			while (rs.next()) {
-				el = new Person(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
-						rs.getDate(5).toLocalDate());
-				rep.add(el);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			throw new DALException("select by name failed", e);
-		} finally {
+	public List<Person> findByName(String name) throws DALException {
+			name = "%" + name + "%";
+			List<Person> rep =new ArrayList<>();
+			Person el=null;
+			ResultSet rs = null;
+			PreparedStatement stmt=null;
+			Connection connexion =null;
 			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (stmt != null) {
-					stmt.close();
-				}
-				if (connexion != null) {
-					connexion.close();
+			    connexion = JdbcTools.getConnection();
+				stmt = connexion.prepareStatement(SQL_SELECT_BY_NAME,Statement.RETURN_GENERATED_KEYS);
+				stmt.setString(1, name);
+				stmt.setString(2, name);
+				rs = stmt.executeQuery();
+				while (rs.next()){
+					el= new Person(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate() );
+					rep.add(el);
 				}
 			} catch (SQLException e) {
-				throw new DALException("Close failed", e);
+				// TODO Auto-generated catch block
+				throw new DALException("select by name failed", e);
 			}
-			for (int i = 0; i < rep.size(); i++) {
-				System.out.println(rep.get(i).toString());
-			}
+			finally {
+				try {
+					if (rs != null){
+						rs.close();
+					}
+					if (stmt != null){
+						stmt.close();
+					}
+					if(connexion!=null){
+						connexion.close();
+					}
+				} catch (SQLException e) {
+					throw new DALException("Close failed", e);
+				}
 		}
-		return rep;
+			return rep;	
 	}
+	
 
 	@Override
 	public Person findById(int id) throws DALException {
-		Person p = null;
+		Person p=null;
 		ResultSet rs = null;
 
-		PreparedStatement stmt = null;
-		Connection connexion = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
 		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_SELECT_BY_ID, Statement.RETURN_GENERATED_KEYS);
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_SELECT_BY_ID,Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			while (rs.next()) {
+			while (rs.next()){
 
-				p = new Person(id, rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5).toLocalDate());
+				p= new Person(id,rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate());
+
 
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new DALException("selectAll failed", e);
-
-		} finally {
+				throw new DALException("selectAll failed", e);
+			
+		}
+		finally {
 			try {
-				if (rs != null) {
+				if (rs != null){
 					rs.close();
 				}
-				if (stmt != null) {
+				if (stmt != null){
 					stmt.close();
 				}
-				if (connexion != null) {
+				if(connexion!=null){
 					connexion.close();
 				}
 			} catch (SQLException e) {
 				throw new DALException("Close failed", e);
 			}
-		}
+	}
 		return p;
-
+		
 	}
 
 	@Override
-	public void save(Person person) throws DALException {
+	public void save(Person person) throws DALException  {
 		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Connection connexion = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
 		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_INSERT,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, person.getFirstname());
 			stmt.setString(2, person.getLastname());
 			stmt.setString(3, person.getEmail());
-			stmt.setDate(4, DateUtils.convertUtilToSql(person.getBirthday()));
-
+			stmt.setDate(4,  DateUtils.convertUtilToSql(person.getBirthday()));
+			
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DALException("save failed", e);
-		} finally {
+		}
+		finally {
 			try {
-				if (rs != null) {
+				if (rs != null){
 					rs.close();
 				}
-				if (stmt != null) {
+				if (stmt != null){
 					stmt.close();
 				}
-				if (connexion != null) {
+				if(connexion!=null){
 					connexion.close();
 				}
 			} catch (SQLException e) {
 				throw new DALException("Close failed", e);
 			}
-		}
-
 	}
-
+		
+	}
+	
 	@Override
-	public void update(Person person) throws DALException {
+	public void update(Person person) throws DALException  {
 		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Connection connexion = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
 		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_UPDATE, Statement.RETURN_GENERATED_KEYS);
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_UPDATE,Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, person.getFirstname());
 			stmt.setString(2, person.getLastname());
 			stmt.setString(3, person.getEmail());
-			stmt.setDate(4, DateUtils.convertUtilToSql(person.getBirthday()));
+			stmt.setDate(4,  DateUtils.convertUtilToSql(person.getBirthday()));
 			stmt.setInt(5, person.getId());
-
+			
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DALException("update failed", e);
-		} finally {
+		}
+		finally {
 			try {
-				if (rs != null) {
+				if (rs != null){
 					rs.close();
 				}
-				if (stmt != null) {
+				if (stmt != null){
 					stmt.close();
 				}
-				if (connexion != null) {
+				if(connexion!=null){
 					connexion.close();
 				}
 			} catch (SQLException e) {
 				throw new DALException("Close failed", e);
 			}
-		}
-
 	}
-
+		
+	}
+	
 	@Override
 	public void saveAll(List<Person> people) {
-		for (int i = 0; i < people.size(); i++) {
+		for(int i =0; i<people.size();i++) {
 			try {
 				save(people.get(i));
 			} catch (DALException e) {
@@ -264,65 +275,67 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 				e.printStackTrace();
 			}
 		}
-
+		
 	}
 
-	public void deleteById(int id) throws DALException {
+	public void deleteById(int id) throws DALException{
 		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Connection connexion = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
 		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_DELETE_BY_ID, Statement.RETURN_GENERATED_KEYS);
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_DELETE_BY_ID,Statement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DALException("delete by id failed", e);
-		} finally {
+		}
+		finally {
 			try {
-				if (rs != null) {
+				if (rs != null){
 					rs.close();
 				}
-				if (stmt != null) {
+				if (stmt != null){
 					stmt.close();
 				}
-				if (connexion != null) {
+				if(connexion!=null){
 					connexion.close();
 				}
 			} catch (SQLException e) {
 				throw new DALException("Close failed", e);
 			}
-		}
 	}
-
+	}
+	
 	@Override
 	public void deleteAll() throws DALException {
 		ResultSet rs = null;
-		PreparedStatement stmt = null;
-		Connection connexion = null;
+		PreparedStatement stmt=null;
+		Connection connexion =null;
 		try {
-			connexion = JdbcTools.getConnection();
-			stmt = connexion.prepareStatement(SQL_DELETE_ALL, Statement.RETURN_GENERATED_KEYS);
+		    connexion = JdbcTools.getConnection();
+			stmt = connexion.prepareStatement(SQL_DELETE_ALL,Statement.RETURN_GENERATED_KEYS);
 			rs = stmt.executeQuery();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			throw new DALException("delete all failed", e);
-		} finally {
+		}
+		finally {
 			try {
-				if (rs != null) {
+				if (rs != null){
 					rs.close();
 				}
-				if (stmt != null) {
+				if (stmt != null){
 					stmt.close();
 				}
-				if (connexion != null) {
+				if(connexion!=null){
 					connexion.close();
 				}
 			} catch (SQLException e) {
 				throw new DALException("Close failed", e);
 			}
-		}
+	}
 	}
 	// TODO utiliser FileWriter et BufferedReader/FileReader
 
