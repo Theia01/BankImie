@@ -14,4 +14,6 @@ public interface PersonDao<quiTuVeux> {
 
 	public void saveAll(List<quiTuVeux> people);
 
+	public List<quiTuVeux> findByName() throws DALException;
+
 }

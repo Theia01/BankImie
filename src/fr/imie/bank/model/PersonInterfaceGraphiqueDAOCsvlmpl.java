@@ -14,7 +14,7 @@ import fr.imie.bank.DateUtils;
 
 public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInterfaceGraphique> {
 	private static final String SQL_SELECT="select * from contact ORDER BY lastname";
-	// private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
+	private static final String SQL_SELECT_BY_NAME="SELECT * FROM contact WHERE lastname LIKE ? OR firstname LIKE ?;";
 	private static final String SQL_SELECT_BY_ID = "SELECT * FROM contact WHERE id=?";
 	// private static final String SQL_DELETE="delete from contact where id=?";
 	private static final String SQL_INSERT="INSERT INTO contact(firstname,lastname,email,birthdate) VALUES (?,?,?,?);";
@@ -64,6 +64,47 @@ public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInter
 		
 		
 	}
+	
+	@Override
+	public List<PersonInterfaceGraphique> findByName() throws DALException {
+			List<PersonInterfaceGraphique> rep =new ArrayList<>();
+			PersonInterfaceGraphique el=null;
+			ResultSet rs = null;
+			Statement stmt=null;
+			Connection connexion =null;
+			try {
+			    connexion = JdbcTools.getConnection();
+				stmt = connexion.createStatement();
+				rs = stmt.executeQuery(SQL_SELECT_BY_NAME);
+				while (rs.next()){
+					el= new PersonInterfaceGraphique(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getDate(5).toLocalDate() );
+					rep.add(el);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new DALException("select by name failed", e);
+			}
+			finally {
+				try {
+					if (rs != null){
+						rs.close();
+					}
+					if (stmt != null){
+						stmt.close();
+					}
+					if(connexion!=null){
+						connexion.close();
+					}
+				} catch (SQLException e) {
+					throw new DALException("Close failed", e);
+				}
+				for(int i=0;i<rep.size();i++) {
+					System.out.println(rep.get(i).toString());
+				}
+		}
+			return rep;	
+	}
+	
 
 	@Override
 	public PersonInterfaceGraphique findById(int id) throws DALException {
