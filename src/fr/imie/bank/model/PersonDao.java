@@ -24,4 +24,6 @@ public interface PersonDao<quiTuVeux> {
 	
 	public quiTuVeux lastId() throws DALException;
 
+	public List<quiTuVeux> findByName(String name) throws DALException;
+
 }

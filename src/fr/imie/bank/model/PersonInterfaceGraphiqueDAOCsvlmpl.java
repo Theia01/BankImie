@@ -338,6 +338,15 @@ public class PersonInterfaceGraphiqueDAOCsvlmpl implements PersonDao<PersonInter
 		
 	}
 
+
+
+
+	@Override
+	public List<PersonInterfaceGraphique> findByName() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	// TODO utiliser FileWriter et BufferedReader/FileReader
 
 }

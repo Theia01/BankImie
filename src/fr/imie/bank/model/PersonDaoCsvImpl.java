@@ -339,4 +339,12 @@ public class PersonDaoCsvImpl implements PersonDao<Person> {
 	}
 	// TODO utiliser FileWriter et BufferedReader/FileReader
 
+
+
+	@Override
+	public List<Person> findByName() throws DALException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
